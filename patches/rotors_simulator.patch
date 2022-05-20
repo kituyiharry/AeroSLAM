@@ -1,0 +1,142 @@
+diff --git a/rotors_description/CHANGELOG.rst b/rotors_description/CHANGELOG.rst
+index e42ea4a..e70f9b8 100644
+--- a/rotors_description/CHANGELOG.rst
++++ b/rotors_description/CHANGELOG.rst
+@@ -50,7 +50,7 @@ Changelog for package rotors_description
+ * The ROS interface plugin is now attached to a static model in the world rather than being attahed to the firefly MAV.
+ * Removed dead code from the .xacro macro for the ROS interface plugin.
+ * Removed dead commented code.
+-* More attempted tweaks to fix errors with substitutaion_args/xacro.py. Added better debug print.
++* More attempted tweaks to fix errors with substitutaion_args/xacro. Added better debug print.
+ * Odometry message now being captured by ROS interface plugin and published to ROS framework. Hovering example now works again.
+ * ROS interface plugin publishing actuators and link state messages to ROS platform
+ * ROS message interface plugin now converts magnetic field messages and publishes to ROS.
+@@ -61,7 +61,7 @@ Changelog for package rotors_description
+ * The ROS interface plugin is now attached to a static model in the world rather than being attahed to the firefly MAV.
+ * Removed dead code from the .xacro macro for the ROS interface plugin.
+ * Removed dead commented code.
+-* More attempted tweaks to fix errors with substitutaion_args/xacro.py. Added better debug print.
++* More attempted tweaks to fix errors with substitutaion_args/xacro. Added better debug print.
+ * change euroc to neo
+ * Delete neo9_generic_odometry_sensor.gazebo
+ * Delete neo11_generic_odometry_sensor.gazebo
+diff --git a/rotors_description/launch/xacrodisplay_pelican_base.launch b/rotors_description/launch/xacrodisplay_pelican_base.launch
+index 1a24887..4d150e4 100644
+--- a/rotors_description/launch/xacrodisplay_pelican_base.launch
++++ b/rotors_description/launch/xacrodisplay_pelican_base.launch
+@@ -1,7 +1,7 @@
+ <?xml version="1.0"?>
+ 
+ <launch>
+-  <param name="robot_description" command="$(find xacro)/xacro.py $(find rotors_description)/urdf/pelican.xacro" />
++  <param name="robot_description" command="$(find xacro)/xacro $(find rotors_description)/urdf/pelican.xacro" />
+   <param name="use_gui" value="True"/>
+   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+diff --git a/rotors_description/launch/xacrodisplay_techpod.launch b/rotors_description/launch/xacrodisplay_techpod.launch
+index 22aee2d..8585b74 100644
+--- a/rotors_description/launch/xacrodisplay_techpod.launch
++++ b/rotors_description/launch/xacrodisplay_techpod.launch
+@@ -3,7 +3,7 @@
+ <launch>
+   <arg name="rvizconfig" default="$(find rotors_description)/rviz/techpod_model_view.rviz" />
+ 
+-  <param name="robot_description" command="$(find xacro)/xacro.py 
++  <param name="robot_description" command="$(find xacro)/xacro 
+ 		$(find rotors_description)/urdf/techpod.xacro
+ 		namespace:=techpod" />
+   <param name="use_gui" value="True"/>
+diff --git a/rotors_gazebo/CHANGELOG.rst b/rotors_gazebo/CHANGELOG.rst
+index aaff6eb..9ceedd8 100644
+--- a/rotors_gazebo/CHANGELOG.rst
++++ b/rotors_gazebo/CHANGELOG.rst
+@@ -11,7 +11,7 @@ Changelog for package rotors_gazebo
+ 2.2.0 (2018-12-10)
+ ------------------
+ * fixed xmlns:xacro link
+-* switch to xacro from xacro.py
++* switch to xacro from xacro
+ * switch to package format 2
+ * Merge branch 'feature/mavlink_build' into feature/gazebo9-autobackport
+ * Merge pull request `#521 <https://github.com/ethz-asl/rotors_simulator/issues/521>`_ from scpeters/rotors_gazebo_run_depend
+@@ -63,7 +63,7 @@ Changelog for package rotors_gazebo
+ * The ROS interface plugin is now attached to a static model in the world rather than being attahed to the firefly MAV.
+ * Added beginnings of Gazebo model for the purpose of inserting the ROS interface into the Gazebo world.
+ * Reverted back to commit 357ed0f254823e83e392e239a3ab7d32b595125e (Monday's commit just before .xacro files were merged).
+-* More attempted tweaks to fix errors with substitutaion_args/xacro.py. Added better debug print.
++* More attempted tweaks to fix errors with substitutaion_args/xacro. Added better debug print.
+ * Added debug messages to python files, moving .xacro files from rotors_gazebo/models/rotors_description/urdf into rotors_description/models/urdf.
+ * Changed variable in rotors_gazebo CMakeLists.txt to NO_ROS to match variable in rotors_gazebo_plugins.
+ * Added script files from sitl_gazebo (used to generate iris.sdf).
+@@ -81,7 +81,7 @@ Changelog for package rotors_gazebo
+ * Converted gazebo_ros_interface_plugin from a model plugin to a world plugin.
+ * The ROS interface plugin is now attached to a static model in the world rather than being attahed to the firefly MAV.
+ * Added beginnings of Gazebo model for the purpose of inserting the ROS interface into the Gazebo world.
+-* More attempted tweaks to fix errors with substitutaion_args/xacro.py. Added better debug print.
++* More attempted tweaks to fix errors with substitutaion_args/xacro. Added better debug print.
+ * Added debug messages to python files, moving .xacro files from rotors_gazebo/models/rotors_description/urdf into rotors_description/models/urdf.
+ * Changed variable in rotors_gazebo CMakeLists.txt to NO_ROS to match variable in rotors_gazebo_plugins.
+ * Added script files from sitl_gazebo (used to generate iris.sdf).
+diff --git a/rotors_gazebo/CMakeLists.txt b/rotors_gazebo/CMakeLists.txt
+index e2069ba..e3a380e 100644
+--- a/rotors_gazebo/CMakeLists.txt
++++ b/rotors_gazebo/CMakeLists.txt
+@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
+ project(rotors_gazebo)
+ 
+ add_definitions(-std=c++11)
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCMAKE_CXX_STANDARD=17")
+ 
+ #--------------------------#
+ # Generation of SDF models #
+diff --git a/rotors_gazebo/launch/spawn_fixed_wing.launch b/rotors_gazebo/launch/spawn_fixed_wing.launch
+index 29d3786..aa4e9df 100644
+--- a/rotors_gazebo/launch/spawn_fixed_wing.launch
++++ b/rotors_gazebo/launch/spawn_fixed_wing.launch
+@@ -22,7 +22,7 @@
+ 
+   <!-- send the robot XML to param server -->
+   <param name="robot_description" command="
+-    $(find xacro)/xacro.py '$(arg model)'
++    $(find xacro)/xacro '$(arg model)'
+     enable_logging:=$(arg enable_logging)
+     enable_ground_truth:=$(arg enable_ground_truth)
+     enable_mavlink_interface:=$(arg enable_mavlink_interface)
+diff --git a/rotors_gazebo/scripts/xacro.py b/rotors_gazebo/scripts/xacro.py
+index 653079c..b326294 100755
+--- a/rotors_gazebo/scripts/xacro.py
++++ b/rotors_gazebo/scripts/xacro.py
+@@ -627,9 +627,9 @@ def eval_self_contained(doc):
+ 
+ 
+ def print_usage(exit_code=0):
+-    print("Usage: %s [-o <output>] <input>" % 'xacro.py')
+-    print("       %s --deps       Prints dependencies" % 'xacro.py')
+-    print("       %s --includes   Only evalutes includes" % 'xacro.py')
++    print("Usage: %s [-o <output>] <input>" % 'xacro')
++    print("       %s --deps       Prints dependencies" % 'xacro')
++    print("       %s --includes   Only evalutes includes" % 'xacro')
+     sys.exit(exit_code)
+ 
+ 
+diff --git a/rotors_gazebo_plugins/CMakeLists.txt b/rotors_gazebo_plugins/CMakeLists.txt
+index 4082f9c..f6e5243 100644
+--- a/rotors_gazebo_plugins/CMakeLists.txt
++++ b/rotors_gazebo_plugins/CMakeLists.txt
+@@ -97,6 +97,7 @@ add_definitions(-std=c++11)
+ # the MAVLink Interface plugin build status
+ add_definitions(
+   -DMAVLINK_INTERFACE=${BUILD_MAVLINK_INTERFACE_PLUGIN}
++  -DCMAKE_CXX_STANDARD=17
+ )
+ 
+ # To enable assertions when compiled in release mode.
+diff --git a/rotors_simulator/CMakeLists.txt b/rotors_simulator/CMakeLists.txt
+index 6c2440f..d1d2bda 100644
+--- a/rotors_simulator/CMakeLists.txt
++++ b/rotors_simulator/CMakeLists.txt
+@@ -2,3 +2,4 @@ cmake_minimum_required(VERSION 2.8.3)
+ project(rotors_simulator)
+ find_package(catkin REQUIRED)
+ catkin_metapackage()
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCMAKE_CXX_STANDARD=17")
