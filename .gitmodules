@@ -1,0 +1,27 @@
+[submodule "Aerial-Manipulator-Gazebo"]
+	path = Aerial-Manipulator-Gazebo
+	url = https://github.com/RISC-NYUAD/Aerial-Manipulator-Gazebo.git
+[submodule "rtabmap"]
+	path = rtabmap
+	url = https://github.com/introlab/rtabmap.git
+[submodule "rtabmap_ros"]
+	path = rtabmap_ros
+	url = https://github.com/introlab/rtabmap_ros.git
+[submodule "mav_comm"]
+	path = mav_comm
+	url = https://github.com/ethz-asl/mav_comm.git
+[submodule "rotors_simulator"]
+	path = rotors_simulator
+	url = https://github.com/ethz-asl/rotors_simulator.git
+[submodule "pysdf"]
+	path = pysdf
+	url = https://github.com/andreasBihlmaier/pysdf.git
+[submodule "kinova-ros"]
+	path = kinova-ros
+	url = https://github.com/Kinovarobotics/kinova-ros.git
+[submodule "mavlink"]
+	path = mavlink
+	url = https://github.com/mavlink/mavlink.git
+[submodule "gazebo_ros_demos"]
+	path = gazebo_ros_demos
+	url = https://github.com/ros-simulation/gazebo_ros_demos.git
