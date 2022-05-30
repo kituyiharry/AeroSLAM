@@ -1,5 +1,11 @@
 ## UAV Sensor fusion Simulation (Final Year Project)
 
+
+
+https://user-images.githubusercontent.com/12397823/170942886-acd0a1b2-4278-4500-8611-137f6cfa6819.mp4
+
+
+
 This   is  a   simulation  of   a  UAV   with  stereo   and  depth   cameras
 fitted  for  localization  purposes   using  `stereo_image_proc`.  Based  on
 <https://github.com/RISC-NYUAD/Aerial-Manipulator-Gazebo>
