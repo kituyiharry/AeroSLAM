@@ -1,4 +1,4 @@
-## UAV Sensor fusion Simulation
+## UAV Sensor fusion Simulation (Final Year Project)
 
 This   is  a   simulation  of   a  UAV   with  stereo   and  depth   cameras
 fitted  for  localization  purposes   using  `stereo_image_proc`.  Based  on
