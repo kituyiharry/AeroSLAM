@@ -7,8 +7,7 @@ https://user-images.githubusercontent.com/12397823/170942886-acd0a1b2-4278-4500-
 
 
 This   is  a   simulation  of   a  UAV   with  stereo   and  depth   cameras
-fitted  for  localization  purposes   using  `stereo_image_proc`.  Based  on
-<https://github.com/RISC-NYUAD/Aerial-Manipulator-Gazebo>
+fitted  for  localization  purposes   using  `stereo_image_proc`.
 
 ![Manipulator with Camera](./captures/Screenshot_20220525_144958.png "Manipulator with
 Camera")
